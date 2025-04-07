@@ -24,3 +24,6 @@ The aim is to achieve simplicity and clarity in the knowledge graph.
 Remember, the knowledge graph should be coherent and easily understandable, so maintaining consistency in entity references is crucial.
 # 4. Strict Compliance
 Adhere to the rules strictly. Non-compliance will result in termination
+
+# 5. Language
+IMPORTANT: Always provide node and relationship names in English, regardless of the language of the input text. If the input text contains entities, concepts or relationships in other languages, translate their names to English.
