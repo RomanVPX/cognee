@@ -4,6 +4,9 @@
 .prod.env
 cognee/.data/
 
+# Ignore local visualizations
+scripts/visualizations/
+
 code_pipeline_output*/
 
 *.lance/
