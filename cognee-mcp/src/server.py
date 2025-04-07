@@ -159,12 +159,24 @@ async def cognify(text: str, graph_model_file: str = None, graph_model_name: str
 
         await cognee.add(text)
 
-        try:
-            await cognee.cognify(graph_model=graph_model)
-            logger.info("Cognify process finished.")
-        except Exception as e:
-            logger.error("Cognify process failed.")
-            raise ValueError(f"Failed to cognify: {str(e)}")
+        # Check for default ontology file
+        default_ontology_path = os.path.join(os.getcwd(), "ontology", "dialog_ontology.owl")
+        if os.path.exists(default_ontology_path):
+            logger.info(f"Using default ontology file: {default_ontology_path}")
+            try:
+                await cognee.cognify(graph_model=graph_model, ontology_file_path=default_ontology_path)
+                logger.info("Cognify process finished.")
+            except Exception as e:
+                logger.error(f"Failed to use default ontology, continuing without it: {str(e)}")
+                await cognee.cognify(graph_model=graph_model)
+                logger.info("Cognify process finished without ontology.")
+        else:
+            try:
+                await cognee.cognify(graph_model=graph_model)
+                logger.info("Cognify process finished.")
+            except Exception as e:
+                logger.error("Cognify process failed.")
+                raise ValueError(f"Failed to cognify: {str(e)}")
 
 
 async def codify(repo_path: str):
