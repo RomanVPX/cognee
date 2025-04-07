@@ -60,7 +60,7 @@ async def list_tools() -> list[types.Tool]:
             },
         ),
         types.Tool(
-            name="search",
+            name="cognee_search",
             description="Searches for information in knowledge graph",
             inputSchema={
                 "type": "object",
@@ -132,8 +132,8 @@ async def call_tools(name: str, arguments: dict) -> list[types.TextContent]:
                         text=text,
                     )
                 ]
-            elif name == "search":
-                search_results = await search(arguments["search_query"], arguments["search_type"])
+            elif name == "cognee_search":
+                search_results = await cognee_search(arguments["search_query"], arguments["search_type"])
 
                 return [types.TextContent(type="text", text=search_results)]
             elif name == "prune":
@@ -183,7 +183,7 @@ async def codify(repo_path: str):
             logger.info("Codify process failed.")
 
 
-async def search(search_query: str, search_type: str) -> str:
+async def cognee_search(search_query: str, search_type: str) -> str:
     """Search the knowledge graph"""
     # NOTE: MCP uses stdout to communicate, we must redirect all output
     #       going to stdout ( like the print function ) to stderr.
