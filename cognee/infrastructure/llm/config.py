@@ -15,7 +15,7 @@ class LLMConfig(BaseSettings):
     llm_streaming: bool = False
     llm_max_tokens: int = 16384
     transcription_model: str = "whisper-1"
-    graph_prompt_path: str = "generate_graph_prompt_strict.txt"
+    graph_prompt_path: str = "generate_graph_prompt.txt"
 
     model_config = SettingsConfigDict(env_file=".env", extra="allow")
 
